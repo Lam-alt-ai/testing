@@ -1,0 +1,15 @@
+{
+  "name": "militect-configurator",
+  "version": "1.0.0",
+  "description": "Tesla-style map configurator for Roblox military groups",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'Build complete'",
+    "start": "echo 'Ready for deployment'"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
