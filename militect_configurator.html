@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Militect Map Builder - Tesla-Style Configurator</title>
+    <link rel="stylesheet" href="/static/militect_styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="configurator-container">
+        <!-- Navigation -->
+        <nav class="configurator-nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <span class="logo-text">PROJECT MILITECT</span>
+                </div>
+                <div class="nav-user">
+                    <span class="user-name">{{ user.username }}</span>
+                    <a href="/logout" class="logout-btn">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Configurator -->
+        <div class="configurator-main">
+            <!-- Preview Panel -->
+            <div class="preview-panel">
+                <div class="preview-header">
+                    <h2>Map Preview</h2>
+                    <div class="view-controls">
+                        <button class="view-btn active" data-view="3d">3D View</button>
+                        <button class="view-btn" data-view="top">Top View</button>
+                    </div>
+                </div>
+                
+                <div class="preview-container">
+                    <div class="preview-image">
+                        <img id="mapPreview" src="/static/preview-default.jpg" alt="Map Preview">
+                        <div class="preview-overlay">
+                            <div class="preview-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Theme</span>
+                                    <span class="stat-value" id="previewTheme">USA</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Environment</span>
+                                    <span class="stat-value" id="previewEnvironment">Tropical</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Layout</span>
+                                    <span class="stat-value" id="previewLayout">Layout 1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configuration Panel -->
+            <div class="config-panel">
+                <div class="config-header">
+                    <h2>Build Your Academy</h2>
+                    <p>Customize your military academy map with professional options</p>
+                </div>
+
+                <!-- Academy Theme Selection -->
+                <div class="config-section">
+                    <h3>Academy Theme</h3>
+                    <div class="option-group">
+                        <div class="option-item active" data-option="theme" data-value="usa">
+                            <div class="option-icon">🇺🇸</div>
+                            <div class="option-label">USA</div>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="option-item" data-option="theme" data-value="uk">
+                            <div class="option-icon">🇬🇧</div>
+                            <div class="option-label">UK</div>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="option-item" data-option="theme" data-value="other">
+                            <div class="option-icon">🌍</div>
+                            <div class="option-label">Other</div>
+                            <div class="option-check">✓</div>
+                        </div>
+                    </div>
+                    <div class="custom-theme-input" id="customThemeInput" style="display: none;">
+                        <input type="text" id="customThemeText" placeholder="Enter custom theme name">
+                    </div>
+                </div>
+
+                <!-- Environment Selection -->
+                <div class="config-section">
+                    <h3>Environment</h3>
+                    <div class="option-group">
+                        <div class="option-item active" data-option="environment" data-value="tropical">
+                            <div class="option-icon">🌴</div>
+                            <div class="option-label">Tropical</div>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="option-item" data-option="environment" data-value="snowy">
+                            <div class="option-icon">❄️</div>
+                            <div class="option-label">Snowy</div>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="option-item" data-option="environment" data-value="grass">
+                            <div class="option-icon">🌱</div>
+                            <div class="option-label">Grass</div>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="option-item" data-option="environment" data-value="desert">
+                            <div class="option-icon">🏜️</div>
+                            <div class="option-label">Desert</div>
+                            <div class="option-check">✓</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layout Selection -->
+                <div class="config-section">
+                    <h3>Layout Type</h3>
+                    <div class="layout-group">
+                        <div class="layout-item active" data-option="layout" data-value="layout1">
+                            <div class="layout-preview">
+                                <div class="layout-grid">
+                                    <div class="grid-cell main"></div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell main"></div>
+                                    <div class="grid-cell"></div>
+                                </div>
+                            </div>
+                            <span class="layout-label">Layout 1</span>
+                            <p class="layout-description">Standard military compound with central command</p>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="layout-item" data-option="layout" data-value="layout2">
+                            <div class="layout-preview">
+                                <div class="layout-grid">
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell main"></div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell main"></div>
+                                    <div class="grid-cell main"></div>
+                                    <div class="grid-cell"></div>
+                                </div>
+                            </div>
+                            <span class="layout-label">Layout 2</span>
+                            <p class="layout-description">Distributed facilities with multiple sectors</p>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="layout-item" data-option="layout" data-value="layout3">
+                            <div class="layout-preview">
+                                <div class="layout-grid">
+                                    <div class="grid-cell main"></div>
+                                    <div class="grid-cell main"></div>
+                                    <div class="grid-cell main"></div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                </div>
+                            </div>
+                            <span class="layout-label">Layout 3</span>
+                            <p class="layout-description">Linear academy with training progression</p>
+                            <div class="option-check">✓</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add-ons Section -->
+                <div class="config-section">
+                    <h3>Optional Add-ons</h3>
+                    <div class="addon-group">
+                        <div class="addon-item" data-addon="vanilla-scripts">
+                            <div class="addon-info">
+                                <div class="addon-icon">⚙️</div>
+                                <div class="addon-details">
+                                    <span class="addon-label">Vanilla Works Scripts</span>
+                                    <p class="addon-description">Professional scripting system for enhanced functionality</p>
+                                </div>
+                            </div>
+                            <div class="addon-price">+1,500 R$</div>
+                            <input type="checkbox" class="addon-checkbox">
+                        </div>
+                        <div class="addon-item" data-addon="complete-ui">
+                            <div class="addon-info">
+                                <div class="addon-icon">🎨</div>
+                                <div class="addon-details">
+                                    <span class="addon-label">Complete UI</span>
+                                    <p class="addon-description">Custom user interface design and implementation</p>
+                                </div>
+                            </div>
+                            <div class="addon-price">+1,000 R$</div>
+                            <input type="checkbox" class="addon-checkbox">
+                        </div>
+                        <div class="addon-item" data-addon="npc-gamepass">
+                            <div class="addon-info">
+                                <div class="addon-icon">👥</div>
+                                <div class="addon-details">
+                                    <span class="addon-label">NPC Game Pass System</span>
+                                    <p class="addon-description">Advanced NPC system with gamepass integration</p>
+                                </div>
+                            </div>
+                            <div class="addon-price">+800 R$</div>
+                            <input type="checkbox" class="addon-checkbox">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purchase Section -->
+                <div class="purchase-section">
+                    <div class="pricing-summary">
+                        <div class="price-breakdown">
+                            <div class="price-item">
+                                <span>Base Academy Map</span>
+                                <span id="basePrice">5,000 R$</span>
+                            </div>
+                            <div class="price-item addons-total" style="display: none;">
+                                <span>Add-ons</span>
+                                <span id="addonsPrice">0 R$</span>
+                            </div>
+                        </div>
+                        <div class="price-total">
+                            <span>Total Price</span>
+                            <div class="total-prices">
+                                <span id="totalRobux">5,000 R$</span>
+                                <span id="totalUSD">$25.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tos-agreement">
+                        <input type="checkbox" id="agreeToTos" required>
+                        <label for="agreeToTos">I agree to the Terms of Service and understand that all sales are final. Custom maps will be delivered within 5-7 business days via Discord ticket.</label>
+                    </div>
+
+                    <div class="payment-buttons">
+                        <button class="purchase-btn robux-btn" id="purchaseRobux" disabled>
+                            <div class="btn-content">
+                                <div class="btn-icon">💎</div>
+                                <div class="btn-text">
+                                    <span class="btn-label">Pay with Robux</span>
+                                    <span class="btn-price" id="robuxPrice">5,000 R$</span>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="purchase-btn usd-btn" id="purchaseUSD" disabled>
+                            <div class="btn-content">
+                                <div class="btn-icon">💳</div>
+                                <div class="btn-text">
+                                    <span class="btn-label">Pay with USD</span>
+                                    <span class="btn-price" id="usdPrice">$25.00</span>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/militect_configurator.js"></script>
+</body>
+</html>
